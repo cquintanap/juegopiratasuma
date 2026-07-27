@@ -1,0 +1,239 @@
+* {
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #1e293b;
+  color: #f8fafc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px;
+}
+
+h1 {
+  margin-bottom: 5px;
+  color: #fbbf24;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  text-align: center;
+}
+
+p.subtitle {
+  color: #94a3b8;
+  margin-top: 0;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.game-container {
+  background: #0f172a;
+  border: 4px solid #334155;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  position: relative;
+  max-width: 800px;
+  width: 100%;
+}
+
+.svg-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Estilo de los caminos tipo carretera de la imagen */
+.path-line {
+  stroke: #64748b;
+  stroke-width: 14;
+  stroke-linecap: round;
+}
+
+.path-line-inner {
+  stroke: #0f172a;
+  stroke-width: 10;
+  stroke-linecap: round;
+}
+
+.grid-board {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  gap: 30px; /* Mayor espacio para dar paso a las carreteras */
+  position: relative;
+  z-index: 2;
+}
+
+.cell {
+  background: #334155;
+  border: 3px solid #94a3b8;
+  border-radius: 8px;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 1.1rem;
+  position: relative;
+  transition: all 0.3s ease;
+  opacity: 0.5;
+}
+
+.cell.active {
+  opacity: 1;
+  border-color: #38bdf8;
+  box-shadow: 0 0 18px rgba(56, 189, 248, 0.7);
+  background: #1e293b;
+}
+
+.cell.completed {
+  opacity: 1;
+  border-color: #22c55e;
+  background: #14532d;
+  color: #e2e8f0;
+}
+
+.cell.start-cell {
+  border-color: #fbbf24;
+}
+
+.cell .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #fbbf24;
+}
+
+.paths-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.path-btn {
+  position: absolute;
+  pointer-events: auto;
+  background: #0f172a;
+  color: #fbbf24;
+  border: 2px solid #94a3b8;
+  border-radius: 6px;
+  padding: 2px 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.2s;
+  transform: translate(-50%, -50%);
+}
+
+.path-btn:hover:not(:disabled) {
+  background: #38bdf8;
+  color: #0f172a;
+  border-color: #fff;
+  transform: translate(-50%, -50%) scale(1.2);
+}
+
+.path-btn.correct {
+  background: #22c55e !important;
+  border-color: #bbf7d0 !important;
+  color: white;
+}
+
+.path-btn.wrong {
+  background: #ef4444 !important;
+  border-color: #fca5a5 !important;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(-50%, -50%) rotate(0deg); }
+  25% { transform: translate(-50%, -50%) rotate(-5deg); }
+  75% { transform: translate(-50%, -50%) rotate(5deg); }
+}
+
+.treasure-img {
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.controls {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.status-msg {
+  font-size: 1.1rem;
+  font-weight: 500;
+}
+
+.btn-reset {
+  background: #e11d48;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.btn-reset:hover {
+  background: #be123c;
+}
+
+/* Color del borde exterior del camino recorrido */
+.path-visited-outer {
+  stroke: #15803d !important; /* Verde oscuro */
+}
+
+/* Color interior del camino recorrido */
+.path-visited-inner {
+  stroke: #4ade80 !important; /* Verde brillante neón */
+}
+
+/* Insignia y diseño del Galeón en la celda Start */
+.ship-badge {
+  font-size: 1.6rem;
+  line-height: 1;
+  margin-bottom: 2px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.6));
+  animation: floatShip 2s infinite ease-in-out;
+}
+
+@keyframes floatShip {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* Celda e Insignia del Tesoro Pirata */
+.cell.treasure-cell {
+  background: #78350f !important;
+  border-color: #fbbf24 !important;
+  opacity: 1 !important;
+}
+
+.treasure-badge {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+.treasure-img {
+  font-size: 1.6rem;
+  text-align: center;
+  filter: drop-shadow(0 2px 6px rgba(251, 191, 36, 0.6));
+}
