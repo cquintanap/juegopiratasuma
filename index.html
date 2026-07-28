@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>El Camino del Tesoro Pirata - Con Caminos Visuales</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <h1>🏴‍☠️ El Camino del Tesoro Pirata</h1>
+  <p class="subtitle">Resuelve la suma en la casilla activa y selecciona el camino correcto para llegar al tesoro.</p>
+
+  <div class="game-container" id="game-container">
+    <!-- Capa para dibujar las líneas/caminos entre celdas -->
+    <svg id="svg-paths" class="svg-layer"></svg>
+    
+    <!-- Tablero de casillas -->
+    <div class="grid-board" id="board"></div>
+
+    <!-- Capa para colocar las etiquetas numéricas de cada camino -->
+    <div id="paths-layer" class="paths-container"></div>
+  </div>
+
+  <div class="controls">
+    <div class="status-msg" id="status">¡Empieza en la casilla START!</div>
+    <button class="btn-reset" onclick="resetGame()">Nuevo Laberinto 🔄</button>
+  </div>
+
+<!-- Modal Popup -->
+  <div id="popup-modal" class="modal-overlay">
+    <div class="modal-content">
+      <h2 id="modal-title">🏴‍☠️ ¡Nueva Isla Alcanzada!</h2>
+      <p id="modal-message">Mensaje del evento...</p>
+      <button class="btn-modal" onclick="closeModal()">¡Continuar Navegando! ⚓</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
